@@ -1,0 +1,23 @@
+{
+  "name": "waitforit",
+  "version": "0.0.1",
+  "description": "A simple utility for dealing with parallel async code",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "parallel",
+    "execution",
+    "callback",
+    "async",
+    "wait",
+    "waitfor",
+    "waitforit"
+  ],
+  "author": "Arnor Heidar Sigurdsson <arnorhs@gmail.com>",
+  "license": "MIT"
+}
