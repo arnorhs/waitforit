@@ -1,4 +1,4 @@
-## wait for it..
+# wait for it..
 A simple module for parallel execution with a shared complete callback.
 
 You can use it basically any time you have more than one events that need to
@@ -89,6 +89,9 @@ fs.readFile('file2.txt', 'utf-8', wait('file2'));
 
 Note that the final callback will be called immediately if any of the async handlers get passed
 an error.
+
+### License
+MIT
 
 ### TODO:
 - maybe support cancelling?
