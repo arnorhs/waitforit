@@ -29,8 +29,6 @@ setTimeout(function() {
 
 Have the callbacks return results:
 ```javascript
-var waitforit = require('waitforit');
-
 var wait = waitforit(function(err, results) {
     console.log("Complete called with results: ", results);
     // results will be {"key 1": "value 1", "key 2": "value 2"}
@@ -58,6 +56,21 @@ var wait = waitforit(function(err, results) {
     }
     // do something with the results
 });
+```
+
+In many cases you can just pass the async handlers straight into async calls, eg. with reading
+files, you can do something like:
+```javascript
+var fs = require('fs'),
+    waitforit = require('waitforit');
+
+var wait = waitforit(function(err, files) {
+    console.log(files);
+    // files variable will be the contents of each file by the key you pass into the wait function
+});
+
+fs.readFile('file1.txt', 'utf-8', wait('file1'));
+fs.readFile('file2.txt', 'utf-8', wait('file2'));
 ```
 
 Note that the final callback will be called immediately if any of the async handlers get passed
