@@ -28,7 +28,7 @@ describe('generating a new instance', function() {
         describe('that don\'t get values', function() {
             describe('complete', function() {
                 it('should have two keys with undefined', function(done) {
-                    var waiter = waitforit(function(args) {
+                    var waiter = waitforit(function(err, args) {
                         assert(Object.keys(args).length == 2, "Arguments don't have two keys");
                         assert(args["a"] === undefined && args["b"] === undefined, "Arguments aren't undefined");
                         done();
@@ -39,20 +39,43 @@ describe('generating a new instance', function() {
             });
 
             describe('complete', function() {
-                it('should have two keys with the values 5 & 7', function(done) {
-                    var waiter = waitforit(function(args) {
+                it('should have two keys with the values 5 & 7 and itself as the context', function(done) {
+                    var func;
+                    var waiter = waitforit(func = function(err, args) {
+                        assert(this === func, "Context is not the funciton itself");
                         assert(Object.keys(args).length == 2, "Arguments don't have two keys");
                         assert(args["a"] === 5 && args["b"] === 7, "Arguments don't have the rigth values");
                         done();
                     });
-                    waiter("a")(5);
-                    waiter("b")(7);
+                    waiter("a")(null, 5);
+                    waiter("b")(null, 7);
+                });
+                it('should get called with an error result on error', function(done) {
+                    var waiter = waitforit(function(err, args) {
+                        assert(!!err && err instanceof Error, "Callback wasn't called with an error result");
+                        done();
+                    });
+                    waiter("a")(new Error("some error"), 5);
+                    waiter("b")(null, 7);
+                });
+                it('should be able to control when it\'s done with a result value', function(done) {
+                    var waiter = waitforit(function(err, args) {
+                        if (args.b === 7) {
+                            done();
+                            return;
+                        }
+                        return false;
+                        done();
+                    });
+                    waiter("a")(null, 5);
+                    setTimeout(function() {
+                        waiter("b")(null, 7);
+                    }, 20);
                 });
             });
         });
     });
 });
 
-// TODO: test return value of complete
 // TODO: test callbacks in async calls
-// TOOD: test that the callback's context is itself
+// TODO: test that the callback's context is itself
