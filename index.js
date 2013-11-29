@@ -37,7 +37,7 @@ module.exports = function(complete) {
             });
         };
     };
-}
+};
 
 function allCalled(generated, called) {
     for (var i = 0, l = generated.length; i < l; i++) {
