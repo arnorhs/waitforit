@@ -1,13 +1,13 @@
 {
   "name": "waitforit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple utility for dealing with parallel async code",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "1.14.0"
   },
   "keywords": [
     "parallel",
@@ -19,5 +19,12 @@
     "waitforit"
   ],
   "author": "Arnor Heidar Sigurdsson <arnorhs@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/arnorhs/waitforit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arnorhs/waitforit/issues"
+  }
 }
