@@ -1,5 +1,17 @@
 ## wait for it..
-A simple module for parallel execution with a shared complete callback
+A simple module for parallel execution with a shared complete callback.
+
+You can use it basically any time you have more than one events that need to
+happen before you take action, where it is not important which event happens
+first.
+
+Examples:
+- doing more than one database call where the results don't depend on each other
+- reading multiple files from disk
+- doing two web requests at the same time
+
+Note: It should work in the browser as well, but hasn't been packaged yet for easy
+usage, nor has it been tested very thoroughly.
 
 ### Usage:
 
@@ -65,8 +77,10 @@ var fs = require('fs'),
     waitforit = require('waitforit');
 
 var wait = waitforit(function(err, files) {
-    console.log(files);
-    // files variable will be the contents of each file by the key you pass into the wait function
+    if (err) {
+        throw new Error("couldn't really read any files");
+    }
+    // do something with files.file1, files.file2
 });
 
 fs.readFile('file1.txt', 'utf-8', wait('file1'));

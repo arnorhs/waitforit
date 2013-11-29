@@ -1,6 +1,6 @@
 {
   "name": "waitforit",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple utility for dealing with parallel async code",
   "main": "index.js",
   "scripts": {
